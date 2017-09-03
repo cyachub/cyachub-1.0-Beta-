@@ -1,0 +1,18 @@
+-- Downloaded Asterisk extra sounds.
+
+cd /var/lib/asterisk/sounds
+
+wget http://downloads.asterisk.org/pub/telephony/sounds/asterisk-extra-sounds-en-wav-current.tar.gz
+tar xfz asterisk-extra-sounds-en-wav-current.tar.gz
+rm -f asterisk-extra-sounds-en-wav-current.tar.gz
+
+wget http://downloads.asterisk.org/pub/telephony/sounds/asterisk-extra-sounds-en-g722-current.tar.gz
+tar xfz asterisk-extra-sounds-en-g722-current.tar.gz
+rm -f asterisk-extra-sounds-en-g722-current.tar.gz
+
+
+-- Copy needed sound files for confbridge from downloaded Asterisk extra sounds.
+
+cp /var/lib/asterisk/sounds/conf-youareinconfnum.wav /usr/share/asterisk/sounds/en/
+cp /var/lib/asterisk/sounds/enter-conf-call-number.wav /usr/share/asterisk/sounds/en/
+
