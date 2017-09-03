@@ -1,0 +1,20 @@
+-- Sip accounts. Can use IP phone or softphone in PC, loptop, smartphone or tab.
+
+-- Voicemail accounts. To leave a voice message that can listen by user later by pressing *7.
+
+-- Sip trunk configured. Inbound and outbound calls with PSTN.
+
+-- CDR for reports.
+
+-- Time condition call routing.
+
+-- Ring groups.  sequentially or simultaneously.
+
+-- Call pickup by another phone by pressing *8.
+
+-- Conference. Dial 9000 to create a conference. 9999 to join toa created conference.
+
+-- Call forward.
+
+-- Call parking. Transfer call to 700 to park. It will callback and say the parking slot number (701-750).
+Dial the parking slot number from any phone to connect back to parked call.
