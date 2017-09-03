@@ -22,6 +22,7 @@ if (!$db) {
 //This will be use to find the dst if defined in user_action table.
 $exten = $agi -> request['agi_extension'];
 $agi -> verbose("Call to internal ext: $exten");
+$uniqueid = $agi -> request['agi_uniqueid'];
 
 //This is the search query of the default action on the dialed number.
 //There could be no result (ex. outgoing call to pstn).
@@ -37,7 +38,10 @@ if ($result = $db -> query($sql)) {
 	switch ($action) {
 
 		case 'dial':
+			//Enabling call recording only for direct incoming call to extensions. can add to ringgroup outgoing if needed.
+			$agi -> exec('MixMonitor',$uniqueid.'.wav,ab');
 			$agi -> exec('dial','SIP/'.$exten.',5,tTr');
+			$agi -> exec('StopMixMonitor','');
 			$dialstatus = $agi -> get_variable("DIALSTATUS")[data];
 			$agi->verbose($dialstatus);
 

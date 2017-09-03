@@ -18,3 +18,5 @@
 
 -- Call parking. Transfer call to 700 to park. It will callback and say the parking slot number (701-750).
 Dial the parking slot number from any phone to connect back to parked call.
+
+-- Call recoridng. Enabled call recording only for direct incoming call to extensions. can add to ringgroup outgoing if needed.
