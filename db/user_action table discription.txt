@@ -1,0 +1,56 @@
+user_action table contains 4 main columns. The way we use this table may not perfect, 
+so it is little complex. I'll try my best to explain it here.
+
+Lets start with explaining the column names.
+
+1. extension - This is the dialable numbers we defined in our pabx system. This could be 
+a sip account, a voicemail account or a ring group, etc.
+
+2. status - We have set of specified values that we can use in this column. They are,
+default, inactive, busy, noanswer, unavailable.
+
+3. action - This is the asterisk dialplan application name.
+
+4. dst - This is the values we pass to above asterisk dialplan application.
+
+
+We use this table is 2 different way.
+
+1. We use this table to manage incoming calls to dialing extensions. This is similar to adding dialplan. See below examples.
+
++-----------+---------+--------+------+
+| extension | status  | action | dst  |
++-----------+---------+--------+------+
+| 1000      | default | Dial   | 1000 |
++-----------+---------+--------+------+
+With this row our system will know calls coming to 1000 extension should go to 1000 sip account.
+
++-----------+---------+--------+-----------------+
+| extension | status  | action | dst             |
++-----------+---------+--------+-----------------+
+| 50        | default | goto   | ring_group,50,1 |
++-----------+---------+--------+-----------------+
+With this row our system will know that calls coming to 50 extension should goto 50 ring group.
+
+We can disable this extensions by changing default status to inactive.
+
+
+2. Each sip account calls get dial status like busy/noanswer/unavalable, etc. We also would like to know 
+what we should do if a call get a such a status. we use this table to do that too. see below example.
+
++-----------+-------------+-----------+-----------------------+
+| extension | status      | action    | dst                   |
++-----------+-------------+-----------+-----------------------+
+| 1000      | default     | Dial      | 1000                  |
++-----------+-------------+-----------+-----------------------+
+| 1000      | busy        | VoiceMail | 2000,u                |
++-----------+-------------+-----------+-----------------------+
+| 1000      | noanswer    | VoiceMail | 2000,u                |
++-----------+-------------+-----------+-----------------------+
+| 1000      | unavailable | VoiceMail | 2000,u                |
++-----------+-------------+-----------+-----------------------+
+| 1000      | inactive    | forward   | internal,0112700600,1 |
++-----------+-------------+-----------+-----------------------+
+| 1000      | inactive    | followme  | -                     |
++-----------+-------------+-----------+-----------------------+
+so you may undestand now, this is not that different to dialplan.
